@@ -1,0 +1,25 @@
+{
+  "python_module": "Examples.bmi.Cardio_pipeline",
+  "run": "get_recall",
+  "datasets":
+    [
+      "test_pass.csv",
+      "tmp.csv"
+    ],
+  "columns":[
+    "age",
+    "gender",
+    "height",
+    "weight",
+    "ap_hi",
+    "ap_lo",
+    "cholesterol",
+    "gluc",
+    "smoke",
+    "alco",
+    "active",
+    "target"
+  ],
+  "encoding":null,
+  "threshold": 0.67
+}

@@ -1,0 +1,15 @@
+{
+  "python_module": "Examples.tweets.sentiment_pipeline_pretrained",
+  "run": "compute_sentiment",
+  "datasets":
+    [
+      "sentiment140/cleaned_tweets.csv",
+      "imdb/imdb_data.csv"
+    ],
+  "columns":[
+    "target",
+    "text"
+  ],
+  "encoding":"ISO-8859-1",
+  "threshold": 0.8
+}
