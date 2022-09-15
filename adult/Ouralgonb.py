@@ -66,7 +66,7 @@ def get_profile_benefit_ordering(clprofile,bugprofile,bugdf,cleandf):
 
 	sorted_benefit = sorted(benefit.items(), key=operator.itemgetter(1),reverse=True)
 	import random
-	random.seed(1)
+	random.seed(0)
 	random.shuffle(sorted_benefit)
 	print(sorted_benefit,len(sorted_benefit))
 
@@ -163,7 +163,7 @@ p=helper.Profile()
 p.add_profile(p.identify_min_profile)
 
 
-noisydf=pd.read_csv('./adult/train.txt',delimiter=' ')
+noisydf=pd.read_csv('../datasets/adult/train.txt',delimiter=' ')
 
 considered_feat=list(noisydf.columns)
 considered_feat.remove('Unnamed: 15')
@@ -174,7 +174,7 @@ noisy_score= (Adult.train_classifier(noisydf,considered_feat,'sex'))
 
 
 #cleandf=pd.read_csv('golddata_adult.csv')
-cleandf=pd.read_csv('sampled.csv')
+cleandf=pd.read_csv('../datasets/adult/sampled.csv')
 clean_score= (Adult.train_classifier(cleandf,considered_feat,'sex'))
 
 threshold = 2
