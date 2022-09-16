@@ -177,16 +177,9 @@ def identify_column(benefit_ordering,processed):
         i+=1
     return (sorted_profile_score[0][0][i],identified_profile,sorted_profile_score[0][0])
 
-examples = [
-    "./Examples/airlines"
-    #"./Examples/adult",
-    #"./Examples/bmi",
-    #"./Examples/physicians",
-    #"./Examples/opendata",
-    #"./Examples/tweets"
-]
+examples = []
 
-'''
+
 experiments = open("./SIGMOD_conjunctions_2/list.txt",'r')
 examples += experiments.readlines()
 experiments.close()
@@ -313,11 +306,11 @@ experiments.close()
 experiments = open("./SIGMOD_single_missing_32/list.txt",'r')
 examples += experiments.readlines()
 experiments.close()
-'''
+
 
 for e in examples:
     print('example',e)
-    adb = open(os.path.join(e.strip(), "dataexposer_corr|functional|conformance.txt"), "a")
+    adb = open(os.path.join(e.strip(), "dp.txt"), "a")
     p = Profile()
     p.add_profile(p.identify_min_profile)
 

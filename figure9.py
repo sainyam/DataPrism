@@ -88,25 +88,36 @@ for pvt in pvts:
                     num_diverging = len(diverging)
                     num_attributes = int(e.split('_')[4 if "missing" in pvt else 3])
 
-                    f = open(os.path.join(e.strip(), "pipeline_transform_200_corr|functional.adb"), 'r')
-                    experiment_lines = f.readlines()
-                    f.close()
+                    if os.path.exists(os.path.join(e.strip(), "pipeline_transform_200.adb")):
+                        f = open(os.path.join(e.strip(), "pipeline_transform_200.adb"), 'r')
+                        experiment_lines = f.readlines()
+                        f.close()
+                        bugdoc_inter = len(experiment_lines)
+                    else:
+                        bugdoc_inter = 0
 
-                    bugdoc_inter = len(experiment_lines)
+                    if os.path.exists(os.path.join(e.strip(), "dp.txt")):
+                        f = open(os.path.join(e.strip(), "dp.txt"), 'r')
+                        experiment_lines = f.readlines()
+                        f.close()
+                        dataexposer_inter = int(experiment_lines[-1].strip())
+                    else:
+                        dataexposer_inter = 0
+                    
+                    if os.path.exists(os.path.join(e.strip(), "grptest.txt")):
+                        f = open(os.path.join(e.strip(), "grptest.txt"), 'r')
+                        experiment_lines = f.readlines()
+                        f.close()
+                        grptest_inter = int(experiment_lines[-1].strip())
+                    else:
+                        grptest_inter = 0
+                    if os.path.exists(os.path.join(e.strip(), "anchor.txt")):
+                        f = open(os.path.join(e.strip(), "anchor.txt"), 'r')
+                        experiment_lines = f.readlines()
+                        f.close()
+                    else:
+                        experiment_lines = []
 
-                    f = open(os.path.join(e.strip(), "dataexposer_corr|functional|conformance.txt"), 'r')
-                    experiment_lines = f.readlines()
-                    f.close()
-                    dataexposer_inter = int(experiment_lines[-1].strip())
-
-                    f = open(os.path.join(e.strip(), "grptest.txt"), 'r')
-                    experiment_lines = f.readlines()
-                    f.close()
-                    grptest_inter = int(experiment_lines[-1].strip())
-
-                    #f = open(os.path.join(e.strip(), "anchor.txt"), 'r')
-                    experiment_lines = []#f.readlines()
-                    #f.close()
                     anchor_inter = 0
                     for line in experiment_lines:
                         if "[" in line:
@@ -189,13 +200,13 @@ for pvt in pvts:
                     num_diverging = len(diverging)
                     num_attributes = int(e.split('_')[2])
 
-                    # f = open(os.path.join(e.strip(), "pipeline_transform_201_corr|functional.adb"), 'r')
+                    # f = open(os.path.join(e.strip(), "pipeline_transform_201.adb"), 'r')
                     # experiment_lines = f.readlines()
                     # f.close()
 
                     # bugdoc_inter = len(experiment_lines)
 
-                    f = open(os.path.join(e.strip(), "dataexposer_corr|functional|conformance.txt"), 'r')
+                    f = open(os.path.join(e.strip(), "dp.txt"), 'r')
                     experiment_lines = f.readlines()
                     f.close()
                     dataexposer_inter = float(experiment_lines[-2].strip())
@@ -277,25 +288,35 @@ for pvt in pvts:
                     else:
                         horizontal.append(int(e.split('_')[6 if "missing" in pvt else 5]))
 
-                    f = open(os.path.join(e.strip(), "pipeline_transform_200_corr|functional.adb"), 'r')
-                    experiment_lines = f.readlines()
-                    f.close()
+                    if os.path.exists(os.path.join(e.strip(), "pipeline_transform_200.adb")):
+                        f = open(os.path.join(e.strip(), "pipeline_transform_200.adb"), 'r')
+                        experiment_lines = f.readlines()
+                        f.close()
+                        bugdoc_inter = len(experiment_lines)
+                    else:
+                        bugdoc_inter = 0
 
-                    bugdoc_inter = len(experiment_lines)
-
-                    f = open(os.path.join(e.strip(), "dataexposer_corr|functional|conformance.txt"), 'r')
-                    experiment_lines = f.readlines()
-                    f.close()
-                    dataexposer_inter = int(experiment_lines[-1].strip())
-
-                    f = open(os.path.join(e.strip(), "grptest.txt"), 'r')
-                    experiment_lines = f.readlines()
-                    f.close()
-                    grptest_inter = int(experiment_lines[-1].strip())
-
-                    #f = open(os.path.join(e.strip(), "anchor.txt"), 'r')
-                    experiment_lines = [] #f.readlines()
-                    #f.close()
+                    if os.path.exists(os.path.join(e.strip(), "dp.txt")):
+                        f = open(os.path.join(e.strip(), "dp.txt"), 'r')
+                        experiment_lines = f.readlines()
+                        f.close()
+                        dataexposer_inter = int(experiment_lines[-1].strip())
+                    else:
+                        dataexposer_inter = 0
+                    
+                    if os.path.exists(os.path.join(e.strip(), "grptest.txt")):
+                        f = open(os.path.join(e.strip(), "grptest.txt"), 'r')
+                        experiment_lines = f.readlines()
+                        f.close()
+                        grptest_inter = int(experiment_lines[-1].strip())
+                    else:
+                        grptest_inter = 0
+                    if os.path.exists(os.path.join(e.strip(), "anchor.txt")):
+                        f = open(os.path.join(e.strip(), "anchor.txt"), 'r')
+                        experiment_lines = f.readlines()
+                        f.close()
+                    else:
+                        experiment_lines = []
                     anchor_inter = 0
                     for line in experiment_lines:
                         if "[" in line:
@@ -313,9 +334,9 @@ for pvt in pvts:
                 anchor_dict[c][pvt][t] = anchor
                 gt_dict[c][pvt][t] = grptest
 
-for e in []:#["domain", "missing"]:
+for e in ["domain"]: #["domain", "missing"]:
 
-    for t in [2, 4, 8, 16, 32]:
+    for t in [2]: #[2, 4, 8, 16, 32]:
  
         _ , (ax1, ax2, ax3, ax4) = plt.subplots(1, 4,figsize=(12, 2.5), sharey=True)
 
@@ -359,7 +380,7 @@ for e in []:#["domain", "missing"]:
         ax4.label_outer()
         ax1.legend(loc='center', bbox_to_anchor=(0.1, 1.15), shadow=False, ncol=4)
         plt.tight_layout()
-        plt.savefig("interventions_%s_%d.pdf" % (e, t))
+        plt.savefig("Figure8.pdf")
 
 
 
