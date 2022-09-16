@@ -1,0 +1,10 @@
+./SIGMOD_single_32/synthetic_5_1_1_1
+./SIGMOD_single_32/synthetic_6_4_1_1
+./SIGMOD_single_32/synthetic_7_2_1_1
+./SIGMOD_single_32/synthetic_8_2_1_1
+./SIGMOD_single_32/synthetic_9_3_1_1
+./SIGMOD_single_32/synthetic_10_8_1_1
+./SIGMOD_single_32/synthetic_11_9_1_1
+./SIGMOD_single_32/synthetic_12_1_1_1
+./SIGMOD_single_32/synthetic_13_3_1_1
+./SIGMOD_single_32/synthetic_14_8_1_1
