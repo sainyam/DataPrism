@@ -13,128 +13,128 @@ experiments = open("./SIGMOD_conjunctions_2/list.txt",'r')
 examples += experiments.readlines()
 experiments.close()
 
-experiments = open("./SIGMOD_conjunctions_4/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
+# experiments = open("./SIGMOD_conjunctions_4/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
 
-experiments = open("./SIGMOD_conjunctions_8/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
-
-
-experiments = open("./SIGMOD_conjunctions_16/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
-
-experiments = open("./SIGMOD_conjunctions_32/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
-
-experiments = open("./SIGMOD_conjunctions_missing_2/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
-
-experiments = open("./SIGMOD_conjunctions_missing_4/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
-
-experiments = open("./SIGMOD_conjunctions_missing_8/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
+# experiments = open("./SIGMOD_conjunctions_8/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
 
 
-experiments = open("./SIGMOD_conjunctions_missing_16/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
+# experiments = open("./SIGMOD_conjunctions_16/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
 
-experiments = open("./SIGMOD_conjunctions_missing_32/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
+# experiments = open("./SIGMOD_conjunctions_32/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
+
+# experiments = open("./SIGMOD_conjunctions_missing_2/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
+
+# experiments = open("./SIGMOD_conjunctions_missing_4/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
+
+# experiments = open("./SIGMOD_conjunctions_missing_8/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
+
+
+# experiments = open("./SIGMOD_conjunctions_missing_16/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
+
+# experiments = open("./SIGMOD_conjunctions_missing_32/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
 
 
 experiments = open("./SIGMOD_disjunctions_2/list.txt",'r')
 examples += experiments.readlines()
 experiments.close()
 
-experiments = open("./SIGMOD_disjunctions_4/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
+# experiments = open("./SIGMOD_disjunctions_4/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
 
-experiments = open("./SIGMOD_disjunctions_8/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
-
-
-experiments = open("./SIGMOD_disjunctions_16/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
-
-experiments = open("./SIGMOD_disjunctions_32/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
-
-experiments = open("./SIGMOD_disjunctions_missing_2/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
-
-experiments = open("./SIGMOD_disjunctions_missing_4/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
-
-experiments = open("./SIGMOD_disjunctions_missing_8/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
+# experiments = open("./SIGMOD_disjunctions_8/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
 
 
-experiments = open("./SIGMOD_disjunctions_missing_16/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
+# experiments = open("./SIGMOD_disjunctions_16/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
 
-experiments = open("./SIGMOD_disjunctions_missing_32/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
+# experiments = open("./SIGMOD_disjunctions_32/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
+
+# experiments = open("./SIGMOD_disjunctions_missing_2/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
+
+# experiments = open("./SIGMOD_disjunctions_missing_4/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
+
+# experiments = open("./SIGMOD_disjunctions_missing_8/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
+
+
+# experiments = open("./SIGMOD_disjunctions_missing_16/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
+
+# experiments = open("./SIGMOD_disjunctions_missing_32/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
 
 experiments = open("./SIGMOD_single_2/list.txt",'r')
 examples += experiments.readlines()
 experiments.close()
 
-experiments = open("./SIGMOD_single_4/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
+# experiments = open("./SIGMOD_single_4/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
 
-experiments = open("./SIGMOD_single_8/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
-
-
-experiments = open("./SIGMOD_single_16/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
-
-experiments = open("./SIGMOD_single_32/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
-
-experiments = open("./SIGMOD_single_missing_2/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
-
-experiments = open("./SIGMOD_single_missing_4/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
-
-experiments = open("./SIGMOD_single_missing_8/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
+# experiments = open("./SIGMOD_single_8/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
 
 
-experiments = open("./SIGMOD_single_missing_16/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
+# experiments = open("./SIGMOD_single_16/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
 
-experiments = open("./SIGMOD_single_missing_32/list.txt",'r')
-examples += experiments.readlines()
-experiments.close()
+# experiments = open("./SIGMOD_single_32/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
+
+# experiments = open("./SIGMOD_single_missing_2/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
+
+# experiments = open("./SIGMOD_single_missing_4/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
+
+# experiments = open("./SIGMOD_single_missing_8/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
+
+
+# experiments = open("./SIGMOD_single_missing_16/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
+
+# experiments = open("./SIGMOD_single_missing_32/list.txt",'r')
+# examples += experiments.readlines()
+# experiments.close()
 
 iterations = [
     200
