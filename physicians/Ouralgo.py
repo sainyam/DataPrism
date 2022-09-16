@@ -240,7 +240,7 @@ for prof in buggyProfileslst.keys():
 		buggyProfileslst[prof]/=maxval
 
 import time
-start=time.timme()
+start=time.time()
 
 
 benefit_ordering=(get_profile_benefit_ordering(cleanprofilelst,buggyProfileslst,noisydf,cleandf))
@@ -304,7 +304,7 @@ for (prof,score) in benefit_ordering:
 	print (col,prof)
 end=time.time()
 
-four=open("dp.txt","w")
+fout=open("dp.txt","w")
 fout.write(str(num_interventions)+" "+str(end-start))
 fout.close()
 print ("number of interventions performed",num_interventions)

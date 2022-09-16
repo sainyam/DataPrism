@@ -164,7 +164,7 @@ p=helper.Profile()
 p.add_profile(p.identify_min_profile)
 
 
-noisydf=pd.read_csv('./test_noisy.csv')
+noisydf=pd.read_csv('../datasets/bmi/test_noisy.csv')
 
 considered_feat=list(noisydf.columns)
 
@@ -173,7 +173,7 @@ noisy_score= (Cardio_pipeline.get_recall(noisydf[considered_feat]))
 
 print ("clean now")
 
-cleandf=pd.read_csv('./test_pass.csv')
+cleandf=pd.read_csv('../datasets/bmi/test_pass.csv')
 clean_score= (Cardio_pipeline.get_recall(cleandf[considered_feat]))
 
 threshold = 0.6
@@ -237,8 +237,9 @@ for (prof,score) in benefit_ordering:
 	if prof[0]=='corr':
 		new_df[col]=(p.shuffle_transform(new_df[col]))
 	elif prof[0]=='min' or prof[0]=='max':
-		print ("ratio",cleanprofilelst[prof]*1.0/buggyProfileslst[prof])
-		new_df[col]=(p.linear_transform(new_df[col],0,cleanprofilelst[prof]*1.0/buggyProfileslst[prof]))
+		if 'height' in col or 'weight' in col:
+			print ("ratio",cleanprofilelst[prof]*1.0/buggyProfileslst[prof])
+			new_df[col]=(p.linear_transform(new_df[col],0,cleanprofilelst[prof]*1.0/buggyProfileslst[prof]))
 
 	new_score=Cardio_pipeline.get_recall(new_df[considered_feat])#Adult.train_classifier(new_df,considered_feat,'sex')
 	num_interventions+=1

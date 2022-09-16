@@ -45,10 +45,16 @@ class Dataset:
 			uniq_values=list(set(values))
 			if column in categorical:#len(uniq_values) < 10 and len(values)>2*len(uniq_values):#Check if a column is categorical
 				print("categorical column",column)
+				if 'target' in column:
+					print(self.df[column])
+					categorical_columns.append(column)
+					categorical_values[column] = uniq_values
+					continue
 				self.df[column] = self.df[column].astype('category').cat.codes
 				categorical_columns.append(column)
 				categorical_values[column] = uniq_values
-			
+				if 'target' in column:
+					print(self.df[column],uniq_values)
 		#print (categorical_columns,categorical_values)
 
 
@@ -145,6 +151,7 @@ class Profile:
 		'uniq':self.fraction_unique_values,'outlier':self.outlier,'missing':self.missing}#,'domain':self.domain}
 		self.categorical_singular_profiles={'min':self.identify_min_profile,'max':self.identify_max_profile,
 		'uniq':self.fraction_unique_values,'outlier':self.outlier_distribution,'missing':self.missing,'domain':self.identify_domain_profile}
+		#'min':self.identify_min_profile,'max':self.identify_max_profile,
 		self.text_singular_profiles={'length':self.text_length,'missing':self.missing_text,'domain':self.get_regular_exp}
 		self.numerical_pairwise_profiles={'corr':self.correlation}
 		self.numerical_pair={'correlation':self.correlation}

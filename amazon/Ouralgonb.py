@@ -114,11 +114,13 @@ def get_profile_benefit_ordering(clprofile,bugprofile,bugdf,cleandf):
 		except:
 			benf=0
 		if benf>0:
-			benefit[profile]=benf
+			benefit[profile]=0.1#benf
 
 	sorted_benefit = sorted(benefit.items(), key=operator.itemgetter(1),reverse=True)
 	print(sorted_benefit,len(sorted_benefit))
-
+	import random
+	random.seed(1)
+	random.shuffle(sorted_benefit)	
 	return sorted_benefit
 
 def check_processed_profile(prof,processed):
