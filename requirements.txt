@@ -1,0 +1,10 @@
+nltk
+textblob
+flair
+bugdoc
+aif360
+#'aif360[LFR]'
+anchor-exp
+prose-datainsights @ git+https://github.com/afariha/ConformanceConstraintsReproducibility.git@main#egg=prose-datainsights&subdirectory=Datainsights
+tdda
+latex
