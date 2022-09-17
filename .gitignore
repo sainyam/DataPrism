@@ -7,3 +7,4 @@ __pycache__/
 */**/anchors.txt
 */**/dp.txt
 */**/grptest.txt
+*/**/*.pyc
