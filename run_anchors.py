@@ -84,6 +84,7 @@ def execute(config_path):
         dataset = Dataset(df)
         profiles = dataset.populate_profiles()
         for k, v in profiles.items():
+            if k[0] in "corr|functional|conformance": continue
             if isinstance(v, str):
                 v = 0
             if not v:
