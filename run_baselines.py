@@ -147,7 +147,7 @@ baselines = [
 for b in baselines:
     if b == 'anchors':
         for e in examples:
-            explain(b, os.path.join(e.strip(),'config.json'))
+            explain(os.path.join(e.strip(),'config.json'))
     else:
         os.system("python worker_%s.py & disown" % b )
         try:
