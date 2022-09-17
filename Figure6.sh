@@ -13,4 +13,5 @@ python Ouralgo.py
 cd ../physicians
 python Ouralgo.py
 cd ../
+python run_baselines_fig6.py
 python read_output_fig6.py

@@ -1,0 +1,26 @@
+{
+  "python_module": "Examples.flights.conformance_pipeline",
+  "run": "run",
+  "datasets":
+    [
+      "pass.csv",
+      "fail.csv"
+    ],
+  "columns": [
+    "Origin",
+    "Destination",
+    "Month",
+    "Day",
+    "CRSDepartureTime",
+    "CRSArrivalTime",
+    "UniqueCarrier",
+    "FlightNumber",
+    "ActualElapsedTime",
+    "Distance",
+    "Diverted",
+    "ArrivalDelay"
+  ],
+  "encoding":null,
+  "threshold": 50.0,
+  "bugs": []
+}

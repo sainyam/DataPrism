@@ -1,0 +1,16 @@
+{
+  "python_module": "Examples.amazon.test_proxy",
+  "run": "run",
+  "datasets":
+    [
+      "clean.csv",
+      "dirty.csv"
+    ],
+  "columns":[
+    "asin",
+    "text"
+  ],
+  "encoding":null,
+  "threshold": 0,
+  "bugs" : []
+}

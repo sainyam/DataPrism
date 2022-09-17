@@ -1,0 +1,33 @@
+{
+  "python_module": "Examples.physicians.ingestion",
+  "run": "run",
+  "datasets":
+    [
+      "clean.csv",
+      "hospital_100.csv"
+    ],
+  "columns":[
+    "ProviderNumber",
+    "HospitalName",
+    "Address1",
+    "Address2",
+    "Address3",
+    "City",
+    "State",
+    "ZipCode",
+    "CountyName",
+    "PhoneNumber",
+    "HospitalType",
+    "HospitalOwner",
+    "EmergencyService",
+    "Condition",
+    "MeasureCode",
+    "MeasureName",
+    "Score",
+    "Sample",
+    "Stateavg"
+  ],
+  "encoding":null,
+  "threshold": 0.02,
+  "bugs" : []
+}

@@ -1,0 +1,15 @@
+{
+  "python_module": "adult.Adult",
+  "run": "run",
+  "datasets":
+    [
+      "train.txt",
+      "golddata_adult.csv"
+
+    ],
+  "columns": ["Age","class","fnlwgt","edu","edunum","marital","occupation","relation","race","sex","captain","capos",
+    "hours","country", "target"],
+  "encoding":null,
+  "threshold": 2.0,
+  "bugs": []
+}

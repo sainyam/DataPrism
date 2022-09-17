@@ -1,0 +1,20 @@
+{
+  "python_module": "Examples.opendata.vizual",
+  "run": "run",
+  "datasets":
+    [
+      "clean.csv",
+      "dirty.csv"
+    ],
+  "columns":[
+    "Phone",
+    "Borough",
+    "Address",
+    "Postcode",
+    "Latitude",
+    "Longitude"
+  ],
+  "encoding":null,
+  "threshold": 0,
+  "bugs" : []
+}
