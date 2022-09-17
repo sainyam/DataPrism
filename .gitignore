@@ -1,0 +1,9 @@
+*.pdf
+__pycache__/
+*.jpg
+.DS_Store
+*/**/tmp*.csv
+*/**/pipeline_transform*
+*/**/anchors.txt
+*/**/dp.txt
+*/**/grptest.txt
