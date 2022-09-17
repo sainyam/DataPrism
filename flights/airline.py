@@ -12,7 +12,7 @@ import sys
 np.random.seed(0)
 
 def train_classifier(test):
-	train = pd.read_csv("train.csv")
+	train = pd.read_csv("../datasets/flights/train.csv")
 
 	y_train=train['ArrivalDelay']
 	y_test=test['ArrivalDelay']

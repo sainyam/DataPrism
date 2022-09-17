@@ -195,7 +195,7 @@ p=helper.Profile()
 p.add_profile(p.identify_min_profile)
 
 
-noisydf=pd.read_csv('./fail.csv')
+noisydf=pd.read_csv('../datasets/flights/fail.csv')
 print (noisydf)
 considered_feat=list(noisydf.columns)
 
@@ -207,7 +207,7 @@ noisy_score= (airline.train_classifier(noisydf))
 
 print ("clean now")
 
-cleandf=pd.read_csv('./pass.csv')
+cleandf=pd.read_csv('../datasets/flights/pass.csv')
 clean_score= (airline.train_classifier(cleandf))
 print (cleandf)
 threshold = 40
@@ -310,5 +310,8 @@ for (prof,score) in benefit_ordering:
 	print(col,prof)
 	print (col,prof)
 end=time.time()
+fout=open("dp.txt","w")
+fout.write(str(num_interventions)+" "+str(end-start))
+fout.close()
 print (end-start)
 print ("number of interventions performed",num_interventions)

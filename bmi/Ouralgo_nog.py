@@ -1,12 +1,13 @@
 
-import helper,test_proxy
-import numpy as np
+import helper_latest as helper
+#import helper
+import Cardio_pipeline
 import pandas as pd
 import math
 import operator
 import copy
 import prose.datainsights as di
-
+import time
 
 def get_distance(clprofile,bugprofile):
 	dist=0
@@ -16,7 +17,7 @@ def get_distance(clprofile,bugprofile):
 	return dist
 
 def get_profile_distance(p1,p2):
-	
+	#print (p1,p2)
 	if max(abs(p1),abs(p2))==0:
 		return 0
 	return abs(p1-p2)*1.0/max(abs(p1),abs(p2))
@@ -31,88 +32,35 @@ def get_domain_distance(l1,l2):
 	l3=list(set(l3))
 	return  1-len(inter)*1.0/len(l3)
 
-def clean_dataset_size(prof,new_df,th):
-	new_size=int(new_df.shape[0]*th)
-	print ("size is ",new_size,th)
-	new_df= (new_df.iloc[:new_size])
-	return new_df
-def clean_regexp(prof,df):
-	col=list(df[prof[1]])
 
-	newcol=[]
-	for v in col:
-		try:
-			v=v.replace('(','')
-			v=v.replace(')','')
-			newcol.append(v)
-		except:
-			newcol.append(v)
-
-	df[prof[1]]=newcol
-	print (df['Phone'])
-	return df
-
-def clean_functional(c1,c2,df):
-    val_map={}
-    clean_lst=[]
-    new_df=pd.DataFrame(columns=df.columns)
-    for index,row in df.iterrows():
-        if row[c1] in val_map.keys():
-            if val_map[row[c1]]==row[c2]:
-                clean_lst.append(row)
-                new_df=new_df.append(row)
-                continue
-            else:
-            	row[c2]=val_map[row[c1]]
-            	new_df=new_df.append(row)
-                #val_map[row[c1]]="wrong"
-        else:
-            clean_lst.append(row)
-            new_df=new_df.append(row)
-            val_map[row[c1]]=row[c2]
-            
-
-    #new_df=pd.DataFrame(clean_lst,columns=df.columns) 
-    return new_df
 
 #########################
 ###Benefit calculation###
 #########################
 def get_profile_benefit_ordering(clprofile,bugprofile,bugdf,cleandf):
-
-
-	#####If a column in numerical in one table and textual in another then we need to just identify the number of textual rows and remove those
-
-
 	print (clprofile)
 	benefit={}
 
 	#Add a distance for all profiles here 
 	for profile in clprofile.keys():
-		try:
-			if profile[0]=='conformance':
-				benf=0#clprofile[profile].evaluate(bugdf).avg_violation
-				
-			elif profile[0]=='corr' or profile[0]=='functional' or profile[0]=='missing' or profile[0]=='outlier' or profile[0]=='uniq':
-				viol=get_absolute_profile_distance(clprofile[profile],bugprofile[profile])
-				if profile[0]=='functional' or profile[0]=='missing' or profile[0]=='outlier' or profile[0]=='uniq':
-					benf=viol*bugprofile[profile]
-				else:
-					benf=viol
-
-
-				print(benf,clprofile[profile],bugprofile[profile],profile)
-			elif profile[0]=='domain':
-				benf=get_domain_distance(clprofile[profile],bugprofile[profile])
-			elif profile[0]=='length':
-				benf=get_absolute_profile_distance(clprofile[profile][-1],bugprofile[profile][-1])
+		if profile[0]=='conformance':
+			benf=0#clprofile[profile].evaluate(bugdf).avg_violation
+			
+		elif profile[0]=='corr' or profile[0]=='functional' or profile[0]=='missing' or profile[0]=='outlier' or profile[0]=='uniq':
+			viol=get_absolute_profile_distance(clprofile[profile],bugprofile[profile])
+			if profile[0]=='functional' or profile[0]=='missing' or profile[0]=='outlier' or profile[0]=='uniq':
+				benf=viol*bugprofile[profile]
 			else:
-				print (profile)
-				benf=get_profile_distance(clprofile[profile],bugprofile[profile])
-				
-				#print(benf,clprofile[profile],bugprofile[profile],profile)
-		except:
-			benf=0
+				benf=viol
+
+
+			print(benf,clprofile[profile],bugprofile[profile],profile)
+		elif profile[0]=='domain':
+			benf=get_domain_distance(clprofile[profile],bugprofile[profile])
+		else:
+			print (profile)
+			benf=get_profile_distance(clprofile[profile],bugprofile[profile])
+			print(benf,clprofile[profile],bugprofile[profile],profile)
 		if benf>0:
 			benefit[profile]=benf
 
@@ -144,7 +92,7 @@ def identify_column(benefit_ordering,processed):
 			if prof[i] not in column_count.keys():
 				column_count[prof[i]]=1
 			else:
-				column_count[prof[i]]+=1
+				column_count[prof[i]]=1
 			i+=1
 
 		'''
@@ -195,7 +143,7 @@ def identify_column(benefit_ordering,processed):
 		
 	sorted_profile_score = sorted(prof_count.items(), key=operator.itemgetter(1),reverse=True)
 
-	#print ("sorted profile score",sorted_profile_score)
+	print ("sorted profile score",sorted_profile_score)
 	identified_profile=sorted_profile_score[0][0]
 	#print(prof_count)
 	i=1
@@ -212,30 +160,28 @@ p=helper.Profile()
 p.add_profile(p.identify_min_profile)
 
 
-noisydf=pd.read_csv('../datasets/amazon/dirty.csv')
+noisydf=pd.read_csv('../datasets/bmi/test_noisy.csv')
 
 considered_feat=list(noisydf.columns)
 
 
-noisy_score= (test_proxy.get_runtime(noisydf[considered_feat]))
+noisy_score= (Cardio_pipeline.get_recall(noisydf[considered_feat]))
 
 print ("clean now")
 
-cleandf=pd.read_csv('../datasets/amazon/clean.csv')
-clean_score= (test_proxy.get_runtime(cleandf[considered_feat]))
+cleandf=pd.read_csv('../datasets/bmi/test_pass.csv')
+clean_score= (Cardio_pipeline.get_recall(cleandf[considered_feat]))
 
-threshold = 0.002
+threshold = 0.6
 print ("Clean score is",clean_score)
 print ("Noisy score is",noisy_score)
 
 cleanprofile=helper.Dataset(cleandf[considered_feat])
 cleanprofilelst=cleanprofile.populate_profiles()
-print ("clean",cleanprofilelst)
-
+print (len(cleanprofilelst))
 buggyprofiles=helper.Dataset(noisydf[considered_feat])
 buggyProfileslst=buggyprofiles.populate_profiles()
 
-print (buggyProfileslst)
 
 
 maxval=1
@@ -259,21 +205,9 @@ for prof in cleanprofilelst.keys():
 for prof in buggyProfileslst.keys():
 	if prof[0]=='corr':
 		buggyProfileslst[prof]/=maxval
-
-
-def remove_characters(new_df):
-
-    lst=[]
-    for iter,row in new_df.iterrows():
-        try:
-            lst.append(row['text'][:100])
-        except:
-            lst.append('')
-            continue
-    new_df['text']=lst
-    print(new_df)
-    return new_df
-import time
+print (cleanprofilelst)
+print ("---------------------------")
+print (buggyProfileslst)
 start=time.time()
 
 benefit_ordering=(get_profile_benefit_ordering(cleanprofilelst,buggyProfileslst,noisydf,cleandf))
@@ -300,51 +234,25 @@ for (prof,score) in benefit_ordering:
 	if prof[0]=='corr':
 		new_df[col]=(p.shuffle_transform(new_df[col]))
 	elif prof[0]=='min' or prof[0]=='max':
-		new_df[col]=new_df[col]
-		#print ("ratio",cleanprofilelst[prof]*1.0/buggyProfileslst[prof])
-		#new_df[col]=(p.linear_transform(new_df[col],0,cleanprofilelst[prof]*1.0/buggyProfileslst[prof]))
-	if prof[0]=='functional' and cleanprofilelst[prof]>0.99:# and prof[1]=='ZipCode': and prof[2]=='City':
-		new_df=clean_functional(prof[1],prof[2],new_df)
-		print ("identified")
-		#print (new_df)
-	if prof[0]=='domain':# and prof[1]=='Phone':
-		new_df=clean_regexp(prof,new_df)
-	if prof[0]=='dataset_size':
-		print (cleandf.shape,noisydf.shape,new_df.shape)
-		thres=cleandf.shape[0]*1.0/noisydf.shape[0]
-		new_df=clean_dataset_size(prof,new_df,thres)
-	if prof[0]=='length':
-		new_df=remove_characters(new_df)
-	new_score=test_proxy.get_runtime(new_df[considered_feat])#Adult.train_classifier(new_df,considered_feat,'sex')
+		if 'height' in col or 'weight' in col:
+			print ("ratio",cleanprofilelst[prof]*1.0/buggyProfileslst[prof])
+			new_df[col]=(p.linear_transform(new_df[col],0,cleanprofilelst[prof]*1.0/buggyProfileslst[prof]))
 
-	print (new_score)
+	new_score=Cardio_pipeline.get_recall(new_df[considered_feat])#Adult.train_classifier(new_df,considered_feat,'sex')
 	num_interventions+=1
 	if new_score>noisy_score:
 		print("some improvement",prof,col,new_score,noisy_score)
-		new_df.index = np.arange(0, len(new_df))
-
-		noisydf=new_df
-		noisy_score=new_score
-		#buggyprofiles=helper.Dataset(noisydf[considered_feat])
-		#buggyProfileslst=buggyprofiles.populate_profiles()
-		#for prof in buggyProfileslst.keys():
-		#	if prof[0]=='corr':
-		#		buggyProfileslst[prof]/=maxval
-		#benefit_ordering=(get_profile_benefit_ordering(cleanprofilelst,buggyProfileslst,noisydf,cleandf))
-
-
-
-
-	if new_score==1:
+		if not prof[0]=='corr':
+			print ("ratio",cleanprofilelst[prof],buggyProfileslst[prof])
+	if new_score>threshold:
 		print ("FOUND BUG",new_score)
 		print (prof,col)
-		print (new_df)
 		break
 	print(col,prof)
 	print (col,prof)
-
 end=time.time()
 fout=open("dp.txt","w")
 fout.write(str(num_interventions)+" "+str(end-start))
 fout.close()
+print(end-start)
 print ("number of interventions performed",num_interventions)

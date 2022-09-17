@@ -44,8 +44,10 @@ def get_profile_benefit_ordering(clprofile,bugprofile,bugdf,cleandf):
 	#Add a distance for all profiles here 
 	for profile in clprofile.keys():
 		if profile[0]=='conformance':
-			benf=0#clprofile[profile].evaluate(bugdf).avg_violation
-			
+			try:
+				benf=clprofile[profile].evaluate(bugdf).avg_violation
+			except:
+				continue
 		elif profile[0]=='corr' or profile[0]=='functional' or profile[0]=='missing' or profile[0]=='outlier' or profile[0]=='uniq':
 			viol=get_absolute_profile_distance(clprofile[profile],bugprofile[profile])
 			if profile[0]=='functional' or profile[0]=='missing' or profile[0]=='outlier' or profile[0]=='uniq':
@@ -233,8 +235,9 @@ for (prof,score) in benefit_ordering:
 	if prof[0]=='corr':
 		new_df[col]=(p.shuffle_transform(new_df[col]))
 	elif prof[0]=='min' or prof[0]=='max':
-		print ("ratio",cleanprofilelst[prof]*1.0/buggyProfileslst[prof])
-		new_df[col]=(p.linear_transform(new_df[col],0,cleanprofilelst[prof]*1.0/buggyProfileslst[prof]))
+		if 'height' in col or 'weight' in col:
+			print ("ratio",cleanprofilelst[prof]*1.0/buggyProfileslst[prof])
+			new_df[col]=(p.linear_transform(new_df[col],0,cleanprofilelst[prof]*1.0/buggyProfileslst[prof]))
 
 	new_score=Cardio_pipeline.get_recall(new_df[considered_feat])#Adult.train_classifier(new_df,considered_feat,'sex')
 	num_interventions+=1

@@ -144,7 +144,7 @@ def identify_column(benefit_ordering,processed):
 			if prof[i] not in column_count.keys():
 				column_count[prof[i]]=1
 			else:
-				column_count[prof[i]]+=1
+				column_count[prof[i]]=1
 			i+=1
 
 		'''
