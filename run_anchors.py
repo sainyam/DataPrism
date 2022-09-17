@@ -67,7 +67,7 @@ def transform_functional(c1, c2, df):
 
     return new_df
 
-def execute(name, config_path):
+def execute(config_path):
     with open(config_path) as f:
         config = json.load(f)
     my_dir = os.path.dirname(config_path)
@@ -75,7 +75,7 @@ def execute(name, config_path):
     labels = []
     module = importlib.import_module(config['python_module'])
     run = getattr(module, config['run'])
-    adb = open(os.path.join(my_dir, 'pipeline_time_%s.adb' % name), 'a')
+    adb = open(os.path.join(my_dir, 'anchors.txt') , 'a')
 
     for d in config["datasets"]:
         df = pd.read_csv(os.path.join(my_dir, d), encoding=config["encoding"])

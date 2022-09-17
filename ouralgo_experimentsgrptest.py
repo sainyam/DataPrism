@@ -341,9 +341,7 @@ for e in examples:
 
     noisy_score = None
     noisydf = None
-    #clean_score = None
-    #cleandf = None
-
+   
     with open(os.path.join(e.strip(), "config.json")) as f:
         config = json.load(f)
     for d in config["datasets"]:
@@ -380,43 +378,9 @@ for e in examples:
     
     total_lst=list(benefit_ordering)
 
-    #solution=group_testing_our(total_lst,noisydf,data,run,config)
     solution=group_testing(total_lst,noisydf,data,run)
     adb.write(str(solution[0]) + '\n')
-    '''
-    # Among the top benefit profiles identify the column
-    processed = []
-    num_interventions = 0
-    for (prof, score) in benefit_ordering:
-        if score == 0:
-            break
-        (col, prof) = identify_column(benefit_ordering, processed)
-        processed.append((prof, col))
-        new_df = copy.deepcopy(noisydf)
-
-        if not(prof == 'corr'):
-            transform_column(new_df, col, prof, cleanprofilelst[(prof,col)])
-        else:
-            transform_corr(new_df, col)
-
-        #new_df[col] = (p.shuffle_transform(new_df[col]))
-
-        # Saving transformed data
-        new_df.to_csv(data, index=False)
-        new_score = run(data, config['threshold'],config['bugs'])
-        num_interventions += 1
-        if new_score:
-            print ("FOUND BUG")
-            print (prof, col)
-            if not (prof == 'corr'):
-                adb.write(str((prof, col, cleanprofilelst[(prof, col)])) + '\n')
-            else:
-                adb.write(str((prof, col)) + '\n')
-
-            break
-        print(col, prof)
-        print (col, prof)
-        '''
+    
     end = time.time()
     adb.write(str(end - start) + '\n')
     adb.write(str(num_interventions) + '\n')
