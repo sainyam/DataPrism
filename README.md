@@ -18,7 +18,7 @@ You only need to run this once per user account.
 ### Step 1: Download this repo and cd to it
 
 ```
-git lfs clone https://github.com/sainyam/DataPrism
+git clone https://github.com/sainyam/DataPrism
 cd DataPrism
 ```
 
