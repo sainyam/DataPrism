@@ -37,3 +37,9 @@ pip install -r requirements.txt
 ```
 bash reproduce.sh
 ```
+
+One of the baselines (Anchors) take several hours to run for all experiments. To avoid running only this baselline, please run any script with flag `-a off`. Example:
+
+```
+bash reproduce.sh -a off
+```  

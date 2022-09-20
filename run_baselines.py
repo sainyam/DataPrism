@@ -6,6 +6,11 @@ import zmq
 from debugger import execute as debug
 from run_anchors import execute as explain
 
+
+import sys
+anchor = sys.argv[0]
+
+
 examples = []
 
 
@@ -142,8 +147,11 @@ iterations = [
 
 baselines = [
     'transform',
-    'anchors'
 ]
+
+if anchor == 'on':
+    baselines.append('anchors')
+
 for b in baselines:
     if b == 'anchors':
         for e in examples:
