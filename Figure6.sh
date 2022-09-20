@@ -6,6 +6,7 @@ do
     esac
 done
 
+unzip datasets.zip
 
 #cd adult/
 #python Ouralgo_new.py
@@ -22,5 +23,26 @@ python Ouralgo.py
 cd ../physicians
 python Ouralgo.py
 cd ../
+bash Figure7.sh
+
+
+mv datasets/adult/*.csv Examples/adult/
+mv datasets/adult/*.txt Examples/adult/
+
+
+mv datasets/amazon/*.csv Examples/amazon/
+
+mv datasets/bmi/*.csv Examples/bmi/
+
+mv datasets/flights/*.csv Examples/flights/
+
+mv datasets/opendata/*.csv Examples/opendata/
+
+
+mv datasets/physicians/*.csv Examples/physicians/
+
+mv -r datasets/tweets/* Examples/tweets/
+
+
 python run_baselines_fig6.py "${a}"
 python read_output_fig6.py
