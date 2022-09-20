@@ -41,7 +41,7 @@ mv datasets/opendata/*.csv Examples/opendata/
 
 mv datasets/physicians/*.csv Examples/physicians/
 
-mv -r datasets/tweets/* Examples/tweets/
+mv datasets/tweets/* Examples/tweets/
 
 
 python run_baselines_fig6.py "${a}"
