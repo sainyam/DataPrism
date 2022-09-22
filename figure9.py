@@ -271,7 +271,7 @@ for e in ["domain"]: #["domain", "missing"]:
         ax4.label_outer()
         ax1.legend(loc='center', bbox_to_anchor=(0.1, 1.15), shadow=False, ncol=4)
         plt.tight_layout()
-        plt.savefig("Figure8.pdf")
+        plt.savefig("freshRuns/Figure8.pdf")
 
 
 
@@ -308,7 +308,7 @@ plt.ylabel('# Interventions')
 plt.title('(b) Missing')
 plt.xlabel('Malfunction Thresholds')
 plt.yticks([0,2,4,6,8,10,12,14,16, 18])
-plt.savefig('Figure9b.pdf')
+plt.savefig('freshRuns/Figure9b.pdf')
 #plt.show()
 
 
