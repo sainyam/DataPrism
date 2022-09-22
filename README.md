@@ -22,7 +22,12 @@ git clone https://github.com/sainyam/DataPrism
 cd DataPrism
 ```
 
-### Step 2: Install dependencies
+### Step 2: Download datasets.zip
+```
+https://drive.google.com/file/d/1syQhwIRwdWJBqqT0mJQWfN9LGsZOylnV/view?usp=sharing
+```
+
+### Step 3: Install dependencies
 
 ```
 sudo apt-get virtualenv
@@ -43,3 +48,5 @@ One of the baselines (Anchors) take several hours to run for all experiments. To
 ```
 bash reproduce.sh -a off
 ```  
+
+Plots will be present in freshRuns/ folder
