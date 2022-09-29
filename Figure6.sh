@@ -8,7 +8,10 @@ done
 
 unzip datasets.zip
 
-cd adult/
+cd flights/
+pip install -e DataInsights
+
+cd ../adult/
 python Ouralgo.py
 cd ../tweets
 python Ouralgo.py
