@@ -19,7 +19,7 @@ cd ../bmi
 python Ouralgo.py
 cd ../flights
 python Ouralgo_new.py
-cd amazon
+cd ../amazon
 python Ouralgo.py
 cd ../opendata
 python Ouralgo.py
