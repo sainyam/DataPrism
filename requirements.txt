@@ -7,5 +7,6 @@ aif360
 anchor-exp
 #prose-datainsights @ git+https://github.com/afariha/ConformanceConstraintsReproducibility.git@main#egg=prose-datainsights&subdirectory=Datainsights
 tdda
+fairlearn
 tensorflow
 latex
