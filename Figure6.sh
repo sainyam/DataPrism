@@ -8,14 +8,14 @@ done
 
 unzip datasets.zip
 
-#cd adult/
-#python Ouralgo_new.py
-#cd ../tweets
-#python Ouralgo.py
-#cd ../bmi
-#python Ouralgo.py
-#cd ../flights
-#python Ouralgo_new.py
+cd adult/
+python Ouralgo_new.py
+cd ../tweets
+python Ouralgo.py
+cd ../bmi
+python Ouralgo.py
+cd ../flights
+python Ouralgo_new.py
 cd amazon
 python Ouralgo.py
 cd ../opendata
