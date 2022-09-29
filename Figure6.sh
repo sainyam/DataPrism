@@ -9,7 +9,7 @@ done
 unzip datasets.zip
 
 cd adult/
-python Ouralgo_new.py
+python Ouralgo.py
 cd ../tweets
 python Ouralgo.py
 cd ../bmi
