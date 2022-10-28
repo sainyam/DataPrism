@@ -30,13 +30,14 @@ https://drive.google.com/file/d/1syQhwIRwdWJBqqT0mJQWfN9LGsZOylnV/view?usp=shari
 ### Step 3: Install dependencies
 
 ```
-sudo apt-get virtualenv
+sudo apt-get install -y virtualenv
 virtualenv venv
 source ./venv/bin/activate 
 
 pip install -r requirements.txt
 ```
 
+In case you want to use a custom location for python, please use virtualenv -p <PYTHON_PATH> venv instead
 ### Step 3: Generate all plots
 
 ```

@@ -1,7 +1,7 @@
 import os
 
-time={'dp':{}, 'dp_nog':{}, 'dp_nb':{}}
-num_int={'dp':{}, 'bugdoc':{}, 'anchor':{}}
+time={'dp':{}, 'nog':{}, 'nb':{}}
+num_int={'dp':{}, 'nog':{}, 'nb':{}}
 for folder in ['tweets','adult','bmi','flights','amazon','opendata','physicians']:
 	if os.path.exists('./'+folder+'/dp.txt'):
 		f=open('./'+folder+'/dp.txt')
