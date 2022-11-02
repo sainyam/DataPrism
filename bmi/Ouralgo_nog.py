@@ -251,7 +251,7 @@ for (prof,score) in benefit_ordering:
 	print(col,prof)
 	print (col,prof)
 end=time.time()
-fout=open("dp.txt","w")
+fout=open("nog.txt","w")
 fout.write(str(num_interventions)+" "+str(end-start))
 fout.close()
 print(end-start)
