@@ -114,7 +114,7 @@ def get_profile_benefit_ordering(clprofile,bugprofile,bugdf,cleandf):
 	sorted_benefit = sorted(benefit.items(), key=operator.itemgetter(1),reverse=True)
 	print(sorted_benefit,len(sorted_benefit))
 	import random
-	random.seed(1)
+	random.seed(0)
 	random.shuffle(sorted_benefit)
 
 	
@@ -212,7 +212,7 @@ p=helper.Profile()
 p.add_profile(p.identify_min_profile)
 
 
-noisydf=pd.read_csv('./dirty.csv')
+noisydf=pd.read_csv('../datasets/opendata/dirty.csv')
 
 considered_feat=['Phone','Borough','Address','Postcode','Latitude','Longitude']#list(noisydf.columns)
 
@@ -221,7 +221,7 @@ noisy_score= (vizual.test_clusters(noisydf[considered_feat]))
 
 print ("clean now")
 
-cleandf=pd.read_csv('./clean.csv')
+cleandf=pd.read_csv('../datasets/opendata/clean.csv')
 clean_score= (vizual.test_clusters(cleandf[considered_feat]))
 
 threshold = 0.002
@@ -269,7 +269,6 @@ benefit_ordering=(get_profile_benefit_ordering(cleanprofilelst,buggyProfileslst,
 
 
 print (benefit_ordering)
-
 processed=[]
 num_interventions=0
 for (prof,score) in benefit_ordering:
@@ -323,5 +322,7 @@ for (prof,score) in benefit_ordering:
 		break
 	print(col,prof)
 	print (col,prof)
-
+fout=open('nb.txt','w')
+fout.write(str(num_interventions))
+fout.close()
 print ("number of interventions performed",num_interventions)

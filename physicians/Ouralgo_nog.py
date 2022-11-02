@@ -1,11 +1,12 @@
-import prose.datainsights as di
 
-import helper,Adult
+import helper,ingestion
+import numpy as np
 import pandas as pd
 import math
 import operator
 import copy
-import time
+import prose.datainsights as di
+
 
 def get_distance(clprofile,bugprofile):
 	dist=0
@@ -15,7 +16,7 @@ def get_distance(clprofile,bugprofile):
 	return dist
 
 def get_profile_distance(p1,p2):
-	#print (p1,p2)
+	
 	if max(abs(p1),abs(p2))==0:
 		return 0
 	return abs(p1-p2)*1.0/max(abs(p1),abs(p2))
@@ -30,44 +31,71 @@ def get_domain_distance(l1,l2):
 	l3=list(set(l3))
 	return  1-len(inter)*1.0/len(l3)
 
+def clean_functional(c1,c2,df):
+    val_map={}
+    clean_lst=[]
+    new_df=pd.DataFrame(columns=df.columns)
+    for index,row in df.iterrows():
+        if row[c1] in val_map.keys():
+            if val_map[row[c1]]==row[c2]:
+                clean_lst.append(row)
+                new_df=new_df.append(row)
+                continue
+            else:
+            	row[c2]=val_map[row[c1]]
+            	new_df=new_df.append(row)
+                #val_map[row[c1]]="wrong"
+        else:
+            clean_lst.append(row)
+            new_df=new_df.append(row)
+            val_map[row[c1]]=row[c2]
+            
 
+    #new_df=pd.DataFrame(clean_lst,columns=df.columns) 
+    return new_df
 
 #########################
 ###Benefit calculation###
 #########################
 def get_profile_benefit_ordering(clprofile,bugprofile,bugdf,cleandf):
+
+
+	#####If a column in numerical in one table and textual in another then we need to just identify the number of textual rows and remove those
+
+
 	print (clprofile)
 	benefit={}
 
 	#Add a distance for all profiles here 
 	for profile in clprofile.keys():
-		if profile[0]=='conformance':
-			benf=clprofile[profile].evaluate(bugdf).avg_violation
-			
-		elif profile[0]=='corr' or profile[0]=='functional' or profile[0]=='missing' or profile[0]=='outlier' or profile[0]=='uniq':
-			viol=get_absolute_profile_distance(clprofile[profile],bugprofile[profile])
-			if profile[0]=='functional' or profile[0]=='missing' or profile[0]=='outlier' or profile[0]=='uniq':
-				benf=viol*bugprofile[profile]
-			else:
-				benf=viol
+		try:
+			if profile[0]=='conformance':
+				benf=0#clprofile[profile].evaluate(bugdf).avg_violation
+				
+			elif profile[0]=='corr' or profile[0]=='functional' or profile[0]=='missing' or profile[0]=='outlier' or profile[0]=='uniq':
+				viol=get_absolute_profile_distance(clprofile[profile],bugprofile[profile])
+				if profile[0]=='functional' or profile[0]=='missing' or profile[0]=='outlier' or profile[0]=='uniq':
+					benf=viol*bugprofile[profile]
+				else:
+					benf=viol
 
 
-			print(benf,clprofile[profile],bugprofile[profile],profile)
-		elif profile[0]=='length':
+				print(benf,clprofile[profile],bugprofile[profile],profile)
+			elif profile[0]=='domain':
+				benf=get_domain_distance(clprofile[profile],bugprofile[profile])
+			elif profile[0]=='length':
 				benf=get_absolute_profile_distance(clprofile[profile][-1],bugprofile[profile][-1])
-		elif profile[0]=='domain':
-			benf=get_domain_distance(clprofile[profile],bugprofile[profile])
-		else:
-			print (profile)
-			benf=get_profile_distance(clprofile[profile],bugprofile[profile])
-			print(benf,clprofile[profile],bugprofile[profile],profile)
+			else:
+				print (profile)
+				benf=get_profile_distance(clprofile[profile],bugprofile[profile])
+				
+				#print(benf,clprofile[profile],bugprofile[profile],profile)
+		except:
+			benf=0
 		if benf>0:
-			benefit[profile]=0.1#benf
+			benefit[profile]=benf
 
 	sorted_benefit = sorted(benefit.items(), key=operator.itemgetter(1),reverse=True)
-	import random
-	random.seed(11)
-	random.shuffle(sorted_benefit)
 	print(sorted_benefit,len(sorted_benefit))
 
 	return sorted_benefit
@@ -95,7 +123,7 @@ def identify_column(benefit_ordering,processed):
 			if prof[i] not in column_count.keys():
 				column_count[prof[i]]=1
 			else:
-				column_count[prof[i]]+=1
+				column_count[prof[i]]=1
 			i+=1
 
 		'''
@@ -146,7 +174,7 @@ def identify_column(benefit_ordering,processed):
 		
 	sorted_profile_score = sorted(prof_count.items(), key=operator.itemgetter(1),reverse=True)
 
-	print ("sorted profile score",sorted_profile_score)
+	#print ("sorted profile score",sorted_profile_score)
 	identified_profile=sorted_profile_score[0][0]
 	#print(prof_count)
 	i=1
@@ -163,30 +191,30 @@ p=helper.Profile()
 p.add_profile(p.identify_min_profile)
 
 
-noisydf=pd.read_csv('../datasets/adult/train.txt',delimiter=' ')
+noisydf=pd.read_csv('../datasets/physicians/hospital_100.csv')
 
 considered_feat=list(noisydf.columns)
-considered_feat.remove('Unnamed: 15')
-#considered_feat.remove('target')
-
-noisy_score= (Adult.train_classifier(noisydf,considered_feat,'sex'))
 
 
+noisy_score= (ingestion.return_malfunction(noisydf[considered_feat]))
 
-#cleandf=pd.read_csv('golddata_adult.csv')
-cleandf=pd.read_csv('../datasets/adult/sampled.csv')
-clean_score= (Adult.train_classifier(cleandf,considered_feat,'sex'))
+print ("clean now")
 
-threshold = 2
+cleandf=pd.read_csv('../datasets/physicians/clean.csv')
+clean_score= (ingestion.return_malfunction(cleandf[considered_feat]))
+
+threshold = 0.002
 print ("Clean score is",clean_score)
 print ("Noisy score is",noisy_score)
 
 cleanprofile=helper.Dataset(cleandf[considered_feat])
 cleanprofilelst=cleanprofile.populate_profiles()
+print ("clean",cleanprofilelst)
 
 buggyprofiles=helper.Dataset(noisydf[considered_feat])
 buggyProfileslst=buggyprofiles.populate_profiles()
 
+print (buggyProfileslst)
 
 
 maxval=1
@@ -211,12 +239,17 @@ for prof in buggyProfileslst.keys():
 	if prof[0]=='corr':
 		buggyProfileslst[prof]/=maxval
 
-
+import time
 start=time.time()
 
+
 benefit_ordering=(get_profile_benefit_ordering(cleanprofilelst,buggyProfileslst,noisydf,cleandf))
+
 #Among the top benefit profiles identify the column
-print (benefit_ordering,len(benefit_ordering))
+
+
+print (benefit_ordering)
+
 processed=[]
 num_interventions=0
 for (prof,score) in benefit_ordering:
@@ -231,32 +264,47 @@ for (prof,score) in benefit_ordering:
 
 	processed.append(fullprofile)
 	new_df=copy.deepcopy(noisydf);
-
-	#####################################
-	#####Applying the intervention#######
-	#####################################
 	if prof[0]=='corr':
 		new_df[col]=(p.shuffle_transform(new_df[col]))
 	elif prof[0]=='min' or prof[0]=='max':
-		print ("ratio",cleanprofilelst[prof]*1.0/buggyProfileslst[prof])
-		new_df[col]=(p.linear_transform(new_df[col],0,cleanprofilelst[prof]*1.0/buggyProfileslst[prof]))
+		new_df[col]=new_df[col]
+		#print ("ratio",cleanprofilelst[prof]*1.0/buggyProfileslst[prof])
+		#new_df[col]=(p.linear_transform(new_df[col],0,cleanprofilelst[prof]*1.0/buggyProfileslst[prof]))
+	if prof[0]=='functional' and cleanprofilelst[prof]>0.99:# and prof[1]=='ZipCode': and prof[2]=='City':
+		new_df=clean_functional(prof[1],prof[2],new_df)
+		print ("identified")
+		#print (new_df)
+	new_score=ingestion.return_malfunction(new_df[considered_feat])#Adult.train_classifier(new_df,considered_feat,'sex')
 
-	new_score=(Adult.train_classifier(new_df,considered_feat,'sex'))
+	print (new_score)
+
 	num_interventions+=1
-	if new_score>noisy_score:
+	if new_score<noisy_score:
 		print("some improvement",prof,col,new_score,noisy_score)
-		if not prof[0]=='corr':
-			print ("ratio",cleanprofilelst[prof],buggyProfileslst[prof])
-	if new_score<threshold:
+		new_df.index = np.arange(0, len(new_df))
+
+		noisydf=new_df
+		noisy_score=new_score
+		#buggyprofiles=helper.Dataset(noisydf[considered_feat])
+		#buggyProfileslst=buggyprofiles.populate_profiles()
+		#for prof in buggyProfileslst.keys():
+		#	if prof[0]=='corr':
+		#		buggyProfileslst[prof]/=maxval
+		#benefit_ordering=(get_profile_benefit_ordering(cleanprofilelst,buggyProfileslst,noisydf,cleandf))
+
+
+
+
+	if new_score<=threshold:
 		print ("FOUND BUG",new_score)
 		print (prof,col)
+		print (new_df)
 		break
 	print(col,prof)
 	print (col,prof)
 end=time.time()
-print(end-start)
-fout=open('nb.txt','w')
-fout.write(str(num_interventions)+" "+str(end-start)+"\n")
-fout.close()
 
+fout=open("nog.txt","w")
+fout.write(str(num_interventions)+" "+str(end-start))
+fout.close()
 print ("number of interventions performed",num_interventions)

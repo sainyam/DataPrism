@@ -66,7 +66,7 @@ def get_profile_benefit_ordering(clprofile,bugprofile,bugdf,cleandf):
 
 	sorted_benefit = sorted(benefit.items(), key=operator.itemgetter(1),reverse=True)
 	import random
-	random.seed(0)
+	random.seed(83)
 	random.shuffle(sorted_benefit)
 
 	print(sorted_benefit,len(sorted_benefit))

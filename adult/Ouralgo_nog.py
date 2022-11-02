@@ -6,6 +6,10 @@ import math
 import operator
 import copy
 import time
+import random
+import sys
+
+random.seed(23)
 
 def get_distance(clprofile,bugprofile):
 	dist=0
@@ -62,12 +66,9 @@ def get_profile_benefit_ordering(clprofile,bugprofile,bugdf,cleandf):
 			benf=get_profile_distance(clprofile[profile],bugprofile[profile])
 			print(benf,clprofile[profile],bugprofile[profile],profile)
 		if benf>0:
-			benefit[profile]=0.1#benf
+			benefit[profile]=benf
 
 	sorted_benefit = sorted(benefit.items(), key=operator.itemgetter(1),reverse=True)
-	import random
-	random.seed(11)
-	random.shuffle(sorted_benefit)
 	print(sorted_benefit,len(sorted_benefit))
 
 	return sorted_benefit
@@ -95,7 +96,7 @@ def identify_column(benefit_ordering,processed):
 			if prof[i] not in column_count.keys():
 				column_count[prof[i]]=1
 			else:
-				column_count[prof[i]]+=1
+				column_count[prof[i]]=1
 			i+=1
 
 		'''
@@ -151,12 +152,16 @@ def identify_column(benefit_ordering,processed):
 	#print(prof_count)
 	i=1
 	found=False
+	collst=[]
 	while i<len(sorted_profile_score[0][0]):
 		if sorted_profile_score[0][0][i] in identified_column_lst:
-			found=True
-			break
+			collst.append(sorted_profile_score[0][0][i])#found=True
+			#break
 		i+=1
-	return (sorted_profile_score[0][0][i],identified_profile,sorted_profile_score[0][0])
+	random.shuffle(collst)
+	print ("collst",collst,sorted_profile_score[0][0])	
+	#print ("column to be intervened",sorted_profile_score[0][0],i,sorted_profile_score[0][0][i],identified_column_lst)
+	return (collst[0],identified_profile,sorted_profile_score[0][0])
 
 
 p=helper.Profile()
@@ -255,8 +260,7 @@ for (prof,score) in benefit_ordering:
 	print (col,prof)
 end=time.time()
 print(end-start)
-fout=open('nb.txt','w')
+fout=open('nog.txt','w')
 fout.write(str(num_interventions)+" "+str(end-start)+"\n")
 fout.close()
-
 print ("number of interventions performed",num_interventions)
