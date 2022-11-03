@@ -87,12 +87,12 @@ def train_classifier(df,considered_feat,sensitive):
 # In[3]:
 
 
-def run(data, threshold):
+def run(data, threshold,bugs):
     df = pd.read_csv(data)  # ,delimiter=' ')
     considered_feat = list(df.columns)
     #considered_feat.remove('Unnamed: 15')
     considered_feat.remove('target')
-    return train_classifier(df, considered_feat, 'sex') < threshold
+    return train_classifier(df, considered_feat, 'sex') < threshold,0
 
 
 if __name__ == "__main__":
