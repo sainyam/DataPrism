@@ -62,12 +62,9 @@ def get_profile_benefit_ordering(clprofile,bugprofile,bugdf,cleandf):
 			benf=get_profile_distance(clprofile[profile],bugprofile[profile])
 			print(benf,clprofile[profile],bugprofile[profile],profile)
 		if benf>0:
-			benefit[profile]=0.1#benf
+			benefit[profile]=benf
 
 	sorted_benefit = sorted(benefit.items(), key=operator.itemgetter(1),reverse=True)
-	import random
-	random.seed(11)
-	random.shuffle(sorted_benefit)
 	print(sorted_benefit,len(sorted_benefit))
 
 	return sorted_benefit
@@ -163,7 +160,7 @@ p=helper.Profile()
 p.add_profile(p.identify_min_profile)
 
 
-noisydf=pd.read_csv('../datasets/adult/train.txt')#,delimiter=' ')
+noisydf=pd.read_csv('../datasets/adult/train.txt',delimiter=' ')
 
 considered_feat=list(noisydf.columns)
 considered_feat.remove('Unnamed: 15')
@@ -255,8 +252,7 @@ for (prof,score) in benefit_ordering:
 	print (col,prof)
 end=time.time()
 print(end-start)
-fout=open('nb.txt','w')
-fout.write(str(num_interventions)+" "+str(end-start)+"\n")
+fout=open('dp.txt','w')
+fout.write(str(num_interventions)+" "+str(end-start))
 fout.close()
-
 print ("number of interventions performed",num_interventions)

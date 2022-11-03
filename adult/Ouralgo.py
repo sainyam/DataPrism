@@ -160,7 +160,7 @@ p=helper.Profile()
 p.add_profile(p.identify_min_profile)
 
 
-noisydf=pd.read_csv('../datasets/adult/train.txt',delimiter=' ')
+noisydf=pd.read_csv('../datasets/adult/train.txt')#,delimiter=' ')
 
 considered_feat=list(noisydf.columns)
 considered_feat.remove('Unnamed: 15')
