@@ -1,4 +1,4 @@
-a="on"
+a="off"
 while getopts a: flag
 do
     case "${flag}" in
