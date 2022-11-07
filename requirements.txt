@@ -10,3 +10,5 @@ tdda
 fairlearn
 tensorflow
 latex
+xgboost
+lightgbm

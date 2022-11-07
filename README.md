@@ -20,6 +20,7 @@ You only need to run this once per user account.
 ```
 git clone https://github.com/sainyam/DataPrism
 cd DataPrism
+git lfs pull
 ```
 
 ### Step 2: Download datasets.zip
