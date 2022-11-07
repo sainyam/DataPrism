@@ -26,6 +26,7 @@ git lfs pull
 ### Step 2: Download datasets.zip
 ```
 https://drive.google.com/file/d/1syQhwIRwdWJBqqT0mJQWfN9LGsZOylnV/view?usp=sharing
+unzip datasets.zip
 ```
 
 ### Step 3: Install dependencies
