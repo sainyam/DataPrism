@@ -6,7 +6,6 @@ do
     esac
 done
 
-unzip datasets.zip
 
 cd flights/
 pip install -e DataInsights
