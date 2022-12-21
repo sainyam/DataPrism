@@ -33,7 +33,7 @@ for folder in ['tweets','adult','bmi','flights','amazon','opendata','physicians'
 
 print (num_int)
 
-fout=open('freshRuns/fig7.txt')
+fout=open('freshRuns/fig7.txt',"w")
 
 fout.write("Dataset, DataPrism, DataPrism-NoG, DataPrism-NoB\n")
 for folder in  ['tweets','adult','bmi','flights','amazon','opendata','physicians']:
