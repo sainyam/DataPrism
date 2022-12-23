@@ -18,7 +18,9 @@
     "ActualElapsedTime",
     "Distance",
     "Diverted",
-    "ArrivalDelay"
+    "ArrivalDelay",
+    "Time",
+    "Source"
   ],
   "encoding":null,
   "threshold": 50.0,
