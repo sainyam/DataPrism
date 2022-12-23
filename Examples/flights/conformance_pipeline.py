@@ -18,7 +18,7 @@ import sys
 np.random.seed(0)
 
 def run(data, threshold, bugs):
-	train = pd.read_csv("Examples/airlines/train.csv")
+	train = pd.read_csv("Examples/flights/train.csv")
 	test = pd.read_csv(data)
 
 	y_train=train['ArrivalDelay']
