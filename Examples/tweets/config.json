@@ -3,7 +3,7 @@
   "run": "compute_sentiment",
   "datasets":
     [
-      "sentiment140/cleaned_tweets.csv",
+      "sentiment140/sentiment140.csv",
       "imdb/imdb_data.csv"
     ],
   "columns":[
