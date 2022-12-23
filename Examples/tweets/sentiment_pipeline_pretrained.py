@@ -3,6 +3,7 @@ This pipeline assumes that the tweet length is 140 characters.
 '''
 
 import nltk
+nltk.download('vader_lexicon')
 import pandas as pd
 
 import argparse
