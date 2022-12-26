@@ -12,7 +12,7 @@ cd ../flights
 python Ouralgonb.py
 python Ouralgo_nog.py
 #python Ouralgo_new.py
-cd amazon
+cd ../amazon
 python Ouralgonb.py
 python Ouralgo_nog.py
 #python Ouralgo.py
