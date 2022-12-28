@@ -48,8 +48,8 @@ for folder in ['tweets','adult','bmi','flights','amazon','opendata','physicians'
 print (time,'\n\n',num_int)
 
 fout=open('freshRuns/fig6.txt',"w")
-fout.write(time)
+fout.write(str(time))
 fout.write('\n\n')
-fout.write(num_int)
+fout.write(str(num_int))
 fout.close()
 
