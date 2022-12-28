@@ -292,7 +292,7 @@ plt.boxplot(data, vert=True, patch_artist=True, labels=labels)
 plt.ylabel('# Interventions')
 plt.title('(a) Domain')
 plt.xlabel('Malfunction Thresholds')
-plt.savefig('Figure9a.pdf')
+plt.savefig('freshRuns/Figure9a.pdf')
 #plt.show()
 
 

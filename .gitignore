@@ -1,5 +1,6 @@
 *.pdf
 __pycache__/
+*/**/__pycache__
 *.jpg
 .DS_Store
 */**/tmp*.csv
