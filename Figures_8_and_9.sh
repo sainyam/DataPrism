@@ -6,6 +6,7 @@ do
     esac
 done
 
+mv datasets/*SIGMOD* .
 
 python ouralgo_experiments.py
 python ouralgo_experimentsgrptest.py
