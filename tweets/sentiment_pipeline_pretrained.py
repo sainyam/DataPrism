@@ -17,6 +17,8 @@ import flair
 
 from sklearn.metrics import confusion_matrix
 
+nltk.download('vader_lexicon')
+
 def compute_sentiment(tweet_df):
 	#tweet_df= pd.read_csv(filepath,encoding="ISO-8859-1")
 
