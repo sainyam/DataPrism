@@ -8,7 +8,7 @@ done
 
 mv datasets/*SIGMOD* .
 
-python ouralgo_experiments.py
+python ouralgo_experiments_synth.py
 python ouralgo_experimentsgrptest.py
 python run_baselines.py "${a}"
 python figure9.py
