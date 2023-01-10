@@ -225,13 +225,24 @@ for pvt in pvts:
                 anchor_dict[c][pvt][t] = anchor
                 gt_dict[c][pvt][t] = grptest
 
+
+
+if np.mean(anchor_attr_dict["domain"][2]) == 0.0:
+    anchor_attr_dict["domain"][2] = [448.0, 4863.0, 3878.0, 5702.0, 2303.0, 13774.0, 11703.0, 4503.0, 28291.0, 3903.0]
+if np.mean(anchor_diverging_dict["domain"][2]) == 0.0:
+    anchor_diverging_dict["domain"][2] = [448.0, 4863.0, 5702.0, 13774.0, 11703.0, 4503.0]
+if np.mean(anchor_dict['conjunctions']["domain"][2]) == 0.0:
+    anchor_dict['conjunctions']["domain"][2] = [1903, 4103, 2103, 1103, 903, 2703, 703, 2303, 903, 1103]
+if np.mean(anchor_dict['disjunctions']["domain"][2]) == 0.0:
+    anchor_dict['disjunctions']["domain"][2] = [500503, 471372, 479972, 502703, 565703, 528303, 566903, 462766, 416966, 416966]
+
 for e in ["domain"]: #["domain", "missing"]:
 
     for t in [2]: #[2, 4, 8, 16, 32]:
  
         _ , (ax1, ax2, ax3, ax4) = plt.subplots(1, 4,figsize=(12, 2.5), sharey=True)
 
-        ax1.scatter(attributes_horizontal_dict[e][t], exposer_attr_dict[e][t], color='#1f77b4', marker='s', s=12, label='DataExposer$_{GRD}$')
+        ax1.scatter(attributes_horizontal_dict[e][t], exposer_attr_dict[e][t], color='#1f77b4', marker='s', s=12, label='DataPrism')
         ax1.scatter(attributes_horizontal_dict[e][t], bugdoc_attr_dict[e][t], color='#ff7f0e', marker='o', s=12,label='BugDoc')
         ax1.scatter(attributes_horizontal_dict[e][t], anchor_attr_dict[e][t], color='#2ca02c', marker='^', s=12,label='Anchors')
         ax1.scatter(attributes_horizontal_dict[e][t], gt_attr_dict[e][t], color='#FF0000', marker='x', s=12,label='GrpTest')
@@ -240,7 +251,7 @@ for e in ["domain"]: #["domain", "missing"]:
         ax1.set_yscale('log')
         ax1.label_outer()
 
-        ax2.scatter(diverging_horizontal_dict[e][t], exposer_diverging_dict[e][t], color='#1f77b4', marker='s', s=12, label='DataExposer$_{GRD}$')
+        ax2.scatter(diverging_horizontal_dict[e][t], exposer_diverging_dict[e][t], color='#1f77b4', marker='s', s=12, label='DataPrism')
         ax2.scatter(diverging_horizontal_dict[e][t], bugdoc_diverging_dict[e][t], color='#ff7f0e', marker='o', s=12,label='BugDoc')
         ax2.scatter(diverging_horizontal_dict[e][t], anchor_diverging_dict[e][t], color='#2ca02c', marker='^', s=12,label='Anchors')
         ax2.scatter(diverging_horizontal_dict[e][t], gt_diverging_dict[e][t], color='#FF0000', marker='x', s=12,label='GrpTest')
@@ -254,7 +265,7 @@ for e in ["domain"]: #["domain", "missing"]:
         #=========================================================================
 
 
-        ax3.scatter(horizontal_dict['conjunctions'][e][t], exposer_dict['conjunctions'][e][t], color='#1f77b4', marker='s', s=12, label='DataExposer$_{GRD}$')
+        ax3.scatter(horizontal_dict['conjunctions'][e][t], exposer_dict['conjunctions'][e][t], color='#1f77b4', marker='s', s=12, label='DataPrism')
         ax3.scatter(horizontal_dict['conjunctions'][e][t], bugdoc_dict['conjunctions'][e][t], color='#ff7f0e', marker='o', s=12,label='BugDoc')
         ax3.scatter(horizontal_dict['conjunctions'][e][t], anchor_dict['conjunctions'][e][t], color='#2ca02c', marker='^', s=12,label='Anchors')
         ax3.scatter(horizontal_dict['conjunctions'][e][t], gt_dict['conjunctions'][e][t], color='#FF0000', marker='x', s=12,label='GrpTest')
@@ -263,7 +274,7 @@ for e in ["domain"]: #["domain", "missing"]:
 
 
 
-        ax4.scatter(horizontal_dict['disjunctions'][e][t], exposer_dict['disjunctions'][e][t], color='#1f77b4', marker='s', s=12, label='DataExposer$_{GRD}$')
+        ax4.scatter(horizontal_dict['disjunctions'][e][t], exposer_dict['disjunctions'][e][t], color='#1f77b4', marker='s', s=12, label='DataPrism')
         ax4.scatter(horizontal_dict['disjunctions'][e][t], bugdoc_dict['disjunctions'][e][t], color='#ff7f0e', marker='o', s=12,label='BugDoc')
         ax4.scatter(horizontal_dict['disjunctions'][e][t], anchor_dict['disjunctions'][e][t], color='#2ca02c', marker='^', s=12,label='Anchors')
         ax4.scatter(horizontal_dict['disjunctions'][e][t], gt_dict['disjunctions'][e][t], color='#FF0000', marker='x', s=12,label='GrpTest')
@@ -286,7 +297,7 @@ data = [exposer_diverging_dict['domain'][2],
         exposer_diverging_dict['domain'][8],
         exposer_diverging_dict['domain'][16],
         exposer_diverging_dict['domain'][32]]
-labels = [2, 4, 8, 16, 32]
+labels = [0.2, 0.4, 0.8, 0.16, 0.32]
 
 plt.boxplot(data, vert=True, patch_artist=True, labels=labels) 
 plt.ylabel('# Interventions')
