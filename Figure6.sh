@@ -46,5 +46,5 @@ mv datasets/physicians/*.csv Examples/physicians/
 mv datasets/tweets/* Examples/tweets/
 
 
-python run_baselines_fig6.py "${a}"
+#python run_baselines_fig6.py "${a}"
 python read_output_fig6.py
