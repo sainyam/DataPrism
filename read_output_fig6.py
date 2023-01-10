@@ -48,8 +48,9 @@ for folder in ['tweets','adult','bmi','flights','amazon','opendata','physicians'
 print (time,'\n\n',num_int)
 
 fout=open('freshRuns/fig6.txt',"w")
-fout.write(str(time))
-fout.write('\n\n')
-fout.write(str(num_int))
+fout.write("Dataset, Number of interventions (DataPrism), Time (DataPrism)\n")
+for folder in ['tweets','adult','bmi','flights','amazon','opendata','physicians']:
+        fout.write(folder+" "+str(num_int['dp'][folder])+" "+str(time['dp'][folder])+"\n")
+
 fout.close()
 
